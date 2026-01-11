@@ -2,14 +2,29 @@
   "created_at": "2026-01-11T15:51:15.043215",
   "stages": {
     "resource_finder": {
-      "status": "failed",
-      "started_at": "2026-01-11T15:51:15.043889",
-      "completed_at": "2026-01-11T16:03:47.958061",
-      "success": false,
+      "status": "completed",
+      "started_at": "2026-01-11T16:42:26.968992",
+      "completed_at": "2026-01-11T16:46:55.335324",
+      "success": true,
       "outputs": {
+        "literature_review": "/data/hypogenicai/workspaces/recursion-visual-text-gemini/literature_review.md",
+        "resources_catalog": "/data/hypogenicai/workspaces/recursion-visual-text-gemini/resources.md",
         "papers_dir": "/data/hypogenicai/workspaces/recursion-visual-text-gemini/papers",
         "datasets_dir": "/data/hypogenicai/workspaces/recursion-visual-text-gemini/datasets",
         "code_dir": "/data/hypogenicai/workspaces/recursion-visual-text-gemini/code"
+      }
+    },
+    "experiment_runner": {
+      "status": "failed",
+      "started_at": "2026-01-11T16:46:55.335639",
+      "completed_at": "2026-01-11T16:49:17.388701",
+      "success": false,
+      "outputs": {
+        "success": false,
+        "return_code": 1,
+        "elapsed_time": 142.04157972335815,
+        "log_file": "/data/hypogenicai/workspaces/recursion-visual-text-gemini/logs/execution_gemini.log",
+        "transcript_file": "/data/hypogenicai/workspaces/recursion-visual-text-gemini/logs/execution_gemini_transcript.jsonl"
       }
     }
   },

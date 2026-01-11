@@ -2,16 +2,25 @@
   "success": false,
   "stages": {
     "resource_finder": {
-      "success": false,
-      "completion_marker": null,
+      "success": true,
+      "completion_marker": "/data/hypogenicai/workspaces/recursion-visual-text-gemini/.resource_finder_complete",
       "outputs": {
+        "literature_review": "/data/hypogenicai/workspaces/recursion-visual-text-gemini/literature_review.md",
+        "resources_catalog": "/data/hypogenicai/workspaces/recursion-visual-text-gemini/resources.md",
         "papers_dir": "/data/hypogenicai/workspaces/recursion-visual-text-gemini/papers",
         "datasets_dir": "/data/hypogenicai/workspaces/recursion-visual-text-gemini/datasets",
         "code_dir": "/data/hypogenicai/workspaces/recursion-visual-text-gemini/code"
       },
       "log_file": "/data/hypogenicai/workspaces/recursion-visual-text-gemini/logs/resource_finder_gemini.log",
       "transcript_file": "/data/hypogenicai/workspaces/recursion-visual-text-gemini/logs/resource_finder_gemini_transcript.jsonl",
-      "elapsed_time": 752.9122490882874
+      "elapsed_time": 268.36442852020264
+    },
+    "experiment_runner": {
+      "success": false,
+      "return_code": 1,
+      "elapsed_time": 142.04157972335815,
+      "log_file": "/data/hypogenicai/workspaces/recursion-visual-text-gemini/logs/execution_gemini.log",
+      "transcript_file": "/data/hypogenicai/workspaces/recursion-visual-text-gemini/logs/execution_gemini_transcript.jsonl"
     }
   },
   "work_dir": "/data/hypogenicai/workspaces/recursion-visual-text-gemini"
