@@ -1,0 +1,28 @@
+idea:
+  title: 'Recursive Language Models for Cross-Modal Inference: Integrating Visual
+    and Textual Recursion'
+  domain: artificial_intelligence
+  hypothesis: 'An RLM extended with visual in-context learning (as in Zhou, Y., Li,
+    X., Wang, Q., & Shen, J., 2024) and recursive chunking of both textual and visual
+    elements will outperform standard LLMs and LVLMs on tasks requiring joint text-image
+    reasoning across long or complex inputs.
+
+    '
+  background:
+    description: "What if RLMs could recurse over both text and images, summarizing\
+      \ and decomposing not just words but visuals? By combining recursive prompt\
+      \ decomposition with visual in-context learning (VICL), we could enable multi-hop,\
+      \ multi-modal reasoning\u2014imagine recursively answering questions about a\
+      \ comic book or illustrated manual.\n"
+    papers:
+    - description: '"Visual In-Context Learning for Large Vision-Language Models."
+        Zhou, Y., Li, X., Wang, Q., & Shen, J. (2024). Annual Meeting of the Association
+        for Computational Linguistics.'
+  metadata:
+    source: IdeaHub
+    source_url: https://hypogenic.ai/ideahub/idea/2pHpmgOSvoXimZuYVN5R
+    idea_id: recursive_language_models_for__20260111_155110_8c0cae68
+    created_at: '2026-01-11T15:51:10.283044'
+    status: submitted
+    github_repo_name: recursion-visual-text-gemini
+    github_repo_url: https://github.com/Hypogenic-AI/recursion-visual-text-gemini
