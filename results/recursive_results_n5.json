@@ -1,0 +1,42 @@
+[
+  {
+    "id": 0,
+    "prediction": "The image depicts bright orange, lantern-shaped structures surrounded by green leaves with a papery texture, characteristic of the Chinese lantern plant. Therefore, the label for this image is 0.",
+    "ground_truth": 0,
+    "correct": true,
+    "input_len": 726,
+    "output_len": 37
+  },
+  {
+    "id": 1,
+    "prediction": "The bird in the image has a brownish, streaked plumage with a distinct white stripe above the eye and is in a natural setting. This matches the description of class 0.",
+    "ground_truth": 0,
+    "correct": true,
+    "input_len": 747,
+    "output_len": 38
+  },
+  {
+    "id": 2,
+    "prediction": "The image depicts a daisy characterized by its white petals surrounding a central yellow disc. Based on the class descriptions, this would be classified as class 2.",
+    "ground_truth": 2,
+    "correct": true,
+    "input_len": 734,
+    "output_len": 32
+  },
+  {
+    "id": 3,
+    "prediction": "The image depicts a small to medium-sized wading bird with a slender body, long legs, and a pointed beak, foraging in a wet, muddy environment. The bird's plumage is a mix of browns, grays, and whites. Based on the provided class descriptions, this image is best classified as class **4**.",
+    "ground_truth": 4,
+    "correct": true,
+    "input_len": 780,
+    "output_len": 70
+  },
+  {
+    "id": 4,
+    "prediction": "Based on the description, the image is best classified as Class 8. The bird has a muted color palette with shades of brown, gray, and white, and is perched on a branch amidst greenery, blending into its natural surroundings.",
+    "ground_truth": 8,
+    "correct": true,
+    "input_len": 762,
+    "output_len": 47
+  }
+]

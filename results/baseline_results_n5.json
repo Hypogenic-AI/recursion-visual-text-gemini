@@ -1,0 +1,42 @@
+[
+  {
+    "id": 0,
+    "prediction": "label: 0",
+    "ground_truth": 0,
+    "correct": true,
+    "input_len": 17274,
+    "output_len": 4
+  },
+  {
+    "id": 1,
+    "prediction": "label: 7",
+    "ground_truth": 7,
+    "correct": true,
+    "input_len": 17274,
+    "output_len": 4
+  },
+  {
+    "id": 2,
+    "prediction": "label: 4",
+    "ground_truth": 4,
+    "correct": true,
+    "input_len": 17274,
+    "output_len": 4
+  },
+  {
+    "id": 3,
+    "prediction": "label: 8",
+    "ground_truth": 8,
+    "correct": true,
+    "input_len": 17274,
+    "output_len": 4
+  },
+  {
+    "id": 4,
+    "prediction": "label: 5",
+    "ground_truth": 5,
+    "correct": true,
+    "input_len": 17274,
+    "output_len": 4
+  }
+]

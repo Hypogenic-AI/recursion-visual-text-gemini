@@ -1,5 +1,5 @@
 {
-  "success": false,
+  "success": true,
   "stages": {
     "resource_finder": {
       "success": true,
@@ -13,12 +13,12 @@
       },
       "log_file": "/data/hypogenicai/workspaces/recursion-visual-text-gemini/logs/resource_finder_gemini.log",
       "transcript_file": "/data/hypogenicai/workspaces/recursion-visual-text-gemini/logs/resource_finder_gemini_transcript.jsonl",
-      "elapsed_time": 268.36442852020264
+      "elapsed_time": 251.12753772735596
     },
     "experiment_runner": {
-      "success": false,
-      "return_code": 1,
-      "elapsed_time": 142.04157972335815,
+      "success": true,
+      "return_code": 0,
+      "elapsed_time": 4007.1221911907196,
       "log_file": "/data/hypogenicai/workspaces/recursion-visual-text-gemini/logs/execution_gemini.log",
       "transcript_file": "/data/hypogenicai/workspaces/recursion-visual-text-gemini/logs/execution_gemini_transcript.jsonl"
     }

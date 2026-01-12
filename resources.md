@@ -36,3 +36,4 @@ Total repositories: 3
 - **Strategy**: Targeted search for the papers mentioned in the hypothesis and the specific benchmark `MMLongBench`.
 - **Completion**: All key components (Methodology: RVP, ICL; Evaluation: MMLongBench) have been located and cloned/downloaded.
 - **Next Steps**: The experiment runner should use `code/MMLongBench` to set up the evaluation environment and integrate `RVP` and `DINOv` logic.
+\n## Execution Log\n- Experiment run on `inat2021` subset.\n- Baseline and Recursive models compared.\n- Results documented in `REPORT.md`.

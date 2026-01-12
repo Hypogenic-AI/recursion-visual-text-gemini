@@ -1,60 +1,77 @@
 # Research Plan: Recursive Language Models for Cross-Modal Inference
 
-## Research Question
-Can a Recursive Language Model (RLM) framework, enhanced with Visual In-Context Learning (VICL) and recursive chunking, outperform standard Multimodal LLMs on long-context cross-modal reasoning tasks?
+## 1. Research Question
+Does a **Recursive Visual In-Context Learning (R-VICL)** approach, which recursively chunks and synthesizes patterns from visual examples, outperform standard "all-at-once" In-Context Learning (ICL) in Multimodal Large Language Models (MLLMs) on long-context tasks?
 
-## Background and Motivation
-Standard MLLMs (like GPT-4V, Gemini 1.5) handle long contexts well but often struggle with precise "needle" retrieval or complex reasoning scattered across many images or long documents. Recursive approaches (decomposing tasks into smaller steps or chunks) have shown promise in text. This research explores applying recursion to the visual domain, leveraging Visual In-Context Learning to handle visual analogies dynamically.
+## 2. Background and Motivation
+Standard MLLMs struggle with long contexts containing many visual examples (Many-Shot ICL). They often lose track of patterns or hallucinate when the context window is crowded.
+**Recursive Language Models (RLMs)** propose breaking down inputs into chunks, processing them hierarchically (recursively), and summarizing the information.
+We hypothesize that applying this recursive summarization/pattern-extraction to *visual* examples will improve performance on visual reasoning tasks compared to standard flat prompting.
 
-## Hypothesis Decomposition
-1.  **H1 (Textual Recursion):** Recursive chunking and summarization improves performance on long-context text tasks compared to direct processing (validating the "Recursive" part).
-2.  **H2 (Visual Recursion/ICL):** (If images available) A recursive approach that uses In-Context Learning for visual queries outperforms standard direct visual QA on long sequences.
+## 3. Hypothesis Decomposition
+- **H1:** Recursive chunking of in-context examples allows the model to extract more robust "rules" than linear processing.
+- **H2:** R-VICL will show greater improvement as the number of shots (examples) increases (scaling law of recursion).
 
-## Proposed Methodology
+## 4. Methodology
 
-### Approach: Recursive-VICL
-We will implement a **Recursive Reasoning Agent** that:
-1.  **Decomposes** a complex/long query into sub-queries.
-2.  **Recursively processes** the input stream (text or image list) in chunks.
-3.  **Accumulates** evidence using a "scratchpad" or state.
-4.  **Synthesizes** the final answer.
+### Dataset
+- **MMLongBench**: Specifically the **Many-Shot ICL** subset.
+- **Data Location**: `datasets/MMLongBench/mmlb_data` (Text/Meta) and `datasets/MMLongBench/3_icl_image.tar.gz` (Images).
 
-For the **Visual** component (if data permits), we will use the `ICL` (In-Context Learning) subset of MMLongBench, where the model must learn from visual examples in the context.
+### Models
+1.  **Baseline (Standard ICL)**:
+    -   Model: GPT-4o (via API).
+    -   Method: Feed all $N$ examples + Query Image into the context window directly.
+2.  **Proposed (Recursive ICL)**:
+    -   Model: GPT-4o (via API).
+    -   Method:
+        1.  **Chunking**: Divide $N$ examples into chunks of size $k$ (e.g., $k=2$).
+        2.  **Leaf Recursion**: For each chunk, ask the LLM: "Analyze these examples. What is the common rule or pattern mapping the input image to the output text?"
+        3.  **Node Recursion**: Summarize the rules from the chunks into a "Master Rule".
+        4.  **Inference**: Apply the "Master Rule" to the Query Image.
 
-### Experimental Steps
-1.  **Environment Setup:** Create `uv` venv, install `transformers`, `torch`, `openai`/`anthropic`/`google` SDKs.
-2.  **Data Prep:**
-    *   Use `MMLongBench` text datasets (NIAH, DocQA) immediately.
-    *   Attempt to download `3_icl_image.tar.gz` for the Visual ICL task.
-3.  **Implementation:**
-    *   **Baseline:** Direct API call with full context (limited by token window or relying on model's native long-context).
-    *   **Recursive Method:** A function that splits context, processes chunks with a local or API model (summarizing/extracting), and aggregates.
-4.  **Experiment:** Run both methods on a subset of the data (e.g., 20-50 samples) to measure Accuracy.
+### Evaluation
+- **Metric**: Accuracy (Exact Match / F1 as defined in MMLongBench).
+- **Protocol**:
+    -   Run on a subset of MMLongBench ICL tasks (due to API costs/time).
+    -   Compare Baseline vs. Proposed on the *same* examples.
 
-### Baselines
-*   **Direct-Long-Context:** Feeding the entire long context to the LLM (e.g., GPT-4o or Gemini-1.5-Pro).
-*   **Sliding Window (Implicit):** Standard RAG or simple chunking without recursion (if time permits).
+## 5. Implementation Plan
 
-### Evaluation Metrics
-*   **Accuracy:** Exact Match or LLM-as-Judge scoring (as defined in MMLongBench).
-*   **Cost/Latency:** Token usage comparison.
+### Phase 2: Setup
+1.  Create `uv` environment.
+2.  Install `MMLongBench` dependencies.
+3.  Unpack Image Data (`3_icl_image.tar.gz`).
+4.  Verify data loading.
 
-## Expected Outcomes
-We expect the Recursive method to show higher accuracy on tasks requiring information distributed across the context (e.g., counting, reasoning), potentially at a higher token cost.
+### Phase 3: Implementation
+1.  **`src/recursive_model.py`**: Implement the `RecursiveICLModel` class.
+    -   Inherits from standard `OpenAIModel` wrapper.
+    -   Overrides `generate` to implement the chunking logic.
+2.  **`src/run_eval.py`**: A simplified runner script based on `code/MMLongBench/eval.py`.
 
-## Timeline
-*   **Phase 1 (Planning):** 20 min (Done)
-*   **Phase 2 (Setup & Data):** 20 min (Env setup, download check)
-*   **Phase 3 (Implementation):** 60 min (Coding Baseline and Recursive Agent)
-*   **Phase 4 (Experimentation):** 60 min (Running on NIAH/ICL)
-*   **Phase 5 (Analysis):** 30 min (Results parsing, plotting)
-*   **Phase 6 (Documentation):** 30 min (Report writing)
+### Phase 4: Experiments
+1.  **Baseline Run**: Run GPT-4o on ICL task (standard).
+2.  **Recursive Run**: Run `RecursiveICLModel` on ICL task.
+3.  **Ablation (Optional)**: Vary chunk size.
 
-## Potential Challenges
-*   **Data Availability:** Image download might be slow. Fallback: Focus on Textual Recursion on `NIAH-text`.
-*   **API Limits:** Long contexts consume many tokens. Mitigation: Use small subsets (10-20 samples) and `gemini-1.5-flash` or `gpt-4o-mini` for development.
-*   **Complexity:** Implementing full RVP is complex. Mitigation: Simplified "Recursive Summarization" instead of full program generation.
+### Phase 5: Analysis
+- Calculate accuracy.
+- Analyze "Rules" generated by the recursive model (qualitative analysis).
+- Error analysis.
 
-## Success Criteria
-*   Successfully running the MMLongBench evaluation harness.
-*   Obtaining comparative results between Baseline and Recursive method on at least one task (Text or Image).
+## 6. Timeline
+- **Setup**: 15 min
+- **Implementation**: 45 min
+- **Experiments**: 45 min (Parallelized if possible)
+- **Analysis**: 20 min
+- **Documentation**: 20 min
+
+## 7. Success Criteria
+- The Recursive model achieves higher accuracy than the Baseline.
+- The "Master Rule" is human-interpretable and correct.
+
+## 8. Potential Challenges
+- **API Costs**: Many-shot ICL consumes many tokens. I will limit the test set size (e.g., 20-50 samples) to ensure feasibility.
+- **Latency**: Recursive calls take longer. This is acceptable for research but worth noting.
+- **Image Handling**: Ensuring images are passed correctly to the chunks.
